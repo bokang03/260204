@@ -46,4 +46,16 @@ public class QuestionRepositoryTest {
         assertThat(q1.getContent()).isEqualTo("sbb에 대해서 알고 싶습니다.");
     }
 
+    @Test
+    void 질문_수정(){
+        Question q1 = questionRepository.findById(1).get();
+        q1.setSubject("sbb가 무엇인가요? - 수정");
+
+        questionRepository.save(q1);
+        questionRepository.flush(); // 변경 내용을 DB에 즉시 반영
+
+        Question q1_2 = questionRepository.findById(1).get();
+        assertThat(q1_2.getSubject()).isEqualTo("sbb가 무엇인가요? - 수정");
+    }
+
 }
