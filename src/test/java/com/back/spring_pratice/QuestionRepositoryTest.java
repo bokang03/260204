@@ -7,6 +7,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -20,7 +21,7 @@ public class QuestionRepositoryTest {
     private AnswerRepository answerRepository;
 
     @Test
-    void t1() {
+    void 전체_조회() {
         List<Question> all = this.questionRepository.findAll();
         assertEquals(2, all.size());
 
@@ -28,20 +29,21 @@ public class QuestionRepositoryTest {
         assertEquals("sbb가 무엇인가요?", q.getSubject());
     }
 
-//    @Test
-//    @Transactional
-//    void t2() {
-//        Question q1 = questionRepository.findById(1).get();
-//        System.out.println(q1.getSubject());
-//        System.out.println(q1.getContent());
-//
-//        // q1 질문에 대한 답글
-//        List<Answer> answers = q1.getAnswerList();
-//
-//        for (Answer a : answers) {
-//            System.out.println(a.getContent());
-//        }
-//
-//    }
+    @Test
+    void 질문_subject_일치(){
+        Question q1 = questionRepository.findById(1).get();
+        assertEquals("sbb가 무엇인가요?", q1.getSubject());
+        assertThat(q1.getSubject()).isEqualTo("sbb가 무엇인가요?");
+    }
+
+
+    @Test
+    void 질문_인덱스_찾기() {
+        Question q1 = questionRepository.findBySubject("sbb가 무엇인가요?").get();
+        // select * from question where subject = 'sbb가 무엇인가요?'
+
+        assertThat(q1.getId()).isEqualTo(1);
+        assertThat(q1.getContent()).isEqualTo("sbb에 대해서 알고 싶습니다.");
+    }
 
 }
