@@ -13,12 +13,18 @@ import java.util.List;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본키
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String subject;
     private String content;
 
-    @OneToMany(mappedBy = "question") // mappedBy를 적은 쪽은 외래키가 생성되지 않는다.
+    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
     private List<Answer> answerList = new ArrayList<>();
+
+    // 이렇게 Question 내부에 메서드를 생성
+    public void addAnswer(Answer answer) {
+        answer.setQuestion(this);
+        answerList.add(answer);
+    }
 }

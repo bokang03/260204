@@ -70,21 +70,20 @@ public class QuestionRepositoryTest {
     @Test
     @Transactional
     void 답글_저장(){
-        Question q1 = questionRepository.findById(1).get();
+        Question q1 = new Question();
+        q1.setSubject("새 질문");
 
         Answer a1 = new Answer();
         a1.setContent("답글 1");
 
-//        q1.getAnswerList().add(a1); // q1의 답글 목록에 a1 추가
-//        questionRepository.save(q1);
-
-        a1.setQuestion(q1); // a1이 q1을 참조하도록 설정
-        answerRepository.save(a1);
-        answerRepository.flush();
+        q1.addAnswer(a1);
+        questionRepository.save(q1);
+        questionRepository.flush();
 
         Answer foundedAnswer = answerRepository.findById(1).get();
 
         assertThat(foundedAnswer.getId()).isEqualTo(1);
         assertThat(foundedAnswer.getContent()).isEqualTo("답글 1");
+
     }
 }
