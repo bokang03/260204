@@ -2,12 +2,14 @@ package com.back.spring_pratice;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
+@Setter
 public class Question {
 
     @Id
@@ -17,6 +19,6 @@ public class Question {
     private String subject;
     private String content;
 
-    @OneToMany(mappedBy = "question2") // mappedBy를 적은 쪽은 외래키가 생성되지 않는다.
+    @OneToMany(mappedBy = "question") // mappedBy를 적은 쪽은 외래키가 생성되지 않는다.
     private List<Answer> answerList = new ArrayList<>();
 }
