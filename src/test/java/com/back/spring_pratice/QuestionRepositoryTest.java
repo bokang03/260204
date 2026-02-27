@@ -58,4 +58,14 @@ public class QuestionRepositoryTest {
         assertThat(q1_2.getSubject()).isEqualTo("sbb가 무엇인가요? - 수정");
     }
 
+    @Test
+    void 질문_삭제(){
+        Question q1 = questionRepository.findById(1).get();
+        questionRepository.delete(q1);
+
+        assertThat(questionRepository.count()).isEqualTo(1); // 2개 였는데 삭제해서 1개가 되었는지
+
+
+    }
+
 }
