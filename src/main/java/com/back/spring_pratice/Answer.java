@@ -16,6 +16,6 @@ public class Answer {
     private String subject;
     private String content;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Question question;
 }

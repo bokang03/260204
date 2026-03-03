@@ -30,8 +30,8 @@ public class TestInitData {
             q1.setSubject("sbb가 무엇인가요?");
             q1.setContent("sbb에 대해서 알고 싶습니다.");
 
-//            q1.addAnswer("답글1");
-//            q1.addAnswer("답글2");
+            q1.addAnswer("답글1");
+            q1.addAnswer("답글2");
 
             this.questionRepository.save(q1);  // 첫번째 질문 저장
 //            Answer a1 = new Answer();
