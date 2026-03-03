@@ -53,7 +53,6 @@ public class QuestionRepositoryTest {
         q1.setSubject("sbb가 무엇인가요? - 수정");
 
         questionRepository.save(q1);
-        questionRepository.flush(); // 변경 내용을 DB에 즉시 반영
 
         Question q1_2 = questionRepository.findById(1).get();
         assertThat(q1_2.getSubject()).isEqualTo("sbb가 무엇인가요? - 수정");
@@ -70,20 +69,28 @@ public class QuestionRepositoryTest {
     @Test
     @Transactional
     void 답글_저장(){
-        Question q1 = new Question();
-        q1.setSubject("새 질문");
+        Question q1 = questionRepository.findById(1).get();
+        q1.addAnswer("답글1");
 
-        Answer a1 = new Answer();
-        a1.setContent("답글 1");
-
-        q1.addAnswer(a1);
-        questionRepository.save(q1);
         questionRepository.flush();
 
         Answer foundedAnswer = answerRepository.findById(1).get();
 
         assertThat(foundedAnswer.getId()).isEqualTo(1);
-        assertThat(foundedAnswer.getContent()).isEqualTo("답글 1");
+        assertThat(foundedAnswer.getContent()).isEqualTo("답글1");
+
+    }
+
+    @Test
+    void 질문_답글_함께_삭제() {
+
+//        Answer a1 = answerRepository.findById(1).get();
+//        answerRepository.delete(a1);
+//        Answer a2 = answerRepository.findById(2).get();
+//        answerRepository.delete(a2);
+
+        Question q1 = questionRepository.findById(1).get();
+        questionRepository.delete(q1);
 
     }
 }
