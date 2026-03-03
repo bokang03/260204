@@ -30,18 +30,10 @@ public class TestInitData {
             q1.setSubject("sbb가 무엇인가요?");
             q1.setContent("sbb에 대해서 알고 싶습니다.");
 
-            q1.addAnswer("답글1");
-            q1.addAnswer("답글2");
+//            q1.addAnswer("답글1");
+//            q1.addAnswer("답글2");
 
             this.questionRepository.save(q1);  // 첫번째 질문 저장
-//            Answer a1 = new Answer();
-//            a1.setContent("답글1");
-//            a1.setQuestion(q1);
-//            Answer a2 = new Answer();
-//            a2.setContent("답글1");
-//            a2.setQuestion(q1);
-//            answerRepository.save(a1);  // 첫번째 답글 저장
-//            answerRepository.save(a2);  // 두번째 답글 저장
 
             Question q2 = new Question();
             q2.setSubject("스프링부트 모델 질문입니다.");

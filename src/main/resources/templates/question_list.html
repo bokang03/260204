@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>question_list</h1>
+<div th:text="${myAge}">10</div>
+<div th:text="${questionList.size()}"></div>
+<ul>
+    <li th:each="question : ${questionList}" th:text="${question.subject}"></li>
+</ul>
+</body>
+</html>

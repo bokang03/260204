@@ -24,6 +24,7 @@ public class Question {
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Answer> answerList = new ArrayList<>();
 
+    // 이렇게 Question 내부에 메서드를 생성
     public void addAnswer(String content) {
         Answer answer = new Answer();
         answer.setContent(content);
